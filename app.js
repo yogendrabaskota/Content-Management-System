@@ -15,7 +15,7 @@ app.get("/home",(req,res)=> {
 })
 
 app.listen(2000, ()=> {
-    console.log("Nodejs has started at port 2000")
+    console.log("Nodejs has started at port 2000") 
 })
 
 // 18 min of vdo day 6 
