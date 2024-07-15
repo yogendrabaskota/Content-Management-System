@@ -1,4 +1,11 @@
 const app = require("express")();
+// const mongoose = require("mongoose")
+
+const { connectDatabase } = require("./database/database");
+
+connectDatabase()
+
+
 
 
 app.get("/",(req,res)=> {
@@ -9,13 +16,8 @@ app.get("/",(req,res)=> {
 })
 
 
-//just practicing
-app.get("/home",(req,res)=> {
-    res.send("This is home page")
-})
-
 app.listen(2000, ()=> {
     console.log("Nodejs has started at port 2000") 
 })
 
-// 18 min of vdo day 6 
+// 1hr 7s min of vdo day 6 
