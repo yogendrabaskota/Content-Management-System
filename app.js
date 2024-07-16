@@ -19,8 +19,8 @@ app.get("/",(req,res)=> {
 })
 
 
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+app.use(express.json())   // form ko data dekhine,, navaye undefine auxa
+app.use(express.urlencoded({extended:true}))// "  "
 
 
 app.post("/createBlog",async (req,res)=> {
@@ -42,4 +42,4 @@ app.listen(2000, ()=> {
     console.log("Nodejs has started at port 2000") 
 })
 
-// 1hr 7s min of vdo day 6 
+// 
