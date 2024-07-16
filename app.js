@@ -9,8 +9,6 @@ const Blog = require("./model/blogModel");
 connectDatabase()
 
 
-
-
 app.get("/",(req,res)=> {
     res.json({
         status : 200,
@@ -19,17 +17,26 @@ app.get("/",(req,res)=> {
 })
 
 
+
 app.use(express.json())   // form ko data dekhine,, navaye undefine auxa
 app.use(express.urlencoded({extended:true}))// "  "
 
 
 app.post("/createBlog",async (req,res)=> {
-    console.log(req.body)  // to show everything that filled in form to terminal
+    const title = req.body.title;
+    const subTitle = req.body.subTitle;
+    const description = req.body.description
 
-   // await Blog.create {
-        
-    //}
+   // console.log(req.body)  // to show everything that filled in form to terminal
 
+
+   // table maa haleko:
+    await Blog.create ({
+        title : title,
+        subTitle : subTitle,
+        description : description
+
+    })
 
     res.json({
         statis : 201,
