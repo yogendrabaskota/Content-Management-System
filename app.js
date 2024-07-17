@@ -45,9 +45,9 @@ app.post("/createBlog",async (req,res)=> {
     })
 })
 
-
-app.listen(2000, ()=> {
-    console.log("Nodejs has started at port 2000") 
+PORT = 2000
+app.listen(PORT, ()=> {
+    console.log("Nodejs has started at port", PORT) 
 })
 
 // 
