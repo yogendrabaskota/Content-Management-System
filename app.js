@@ -9,6 +9,10 @@ connectDatabase()
 
 
 
+app.use(express.json())   // form ko data dekhine,, navaye undefine auxa
+app.use(express.urlencoded({extended:true}))// "  "
+
+
 
 app.get("/",(req,res)=> {
     res.json({
@@ -17,10 +21,70 @@ app.get("/",(req,res)=> {
     })
 })
 
+// GET API for all blogs
+app.get("/blogs",async(req,res)=>{
+    const blogs = await Blog.find()  // Blog maa store vako data 'blogs' maa janxa...[ Blog maa vako data vaneko form maa enter gareko data ho]
+// .find() maa jahile ni data array format maa auxa.
+    if(blogs.length == 0){
+        res.json({
+            status : 404,
+            message : "Empty blogs"
+        })
+    }
+    else{
+        res.json({
+            status : 200,
+            message : "Blogs fetched successfully",
+            data : blogs // blogs ko data show garxa 
+        })
+    }
+})
 
 
-app.use(express.json())   // form ko data dekhine,, navaye undefine auxa
-app.use(express.urlencoded({extended:true}))// "  "
+// GET API for single blogs
+
+app.get("/blogs/:id",async(req,res) => {
+ //   // console.log(req.params.id)
+ // YAHA DEKHI
+     const id = req.params.id
+    // const blog = await Blog.find({_id : id})
+    // if(blog.length == 0){
+    // res.json({
+    //     status : 404,
+    //     message : "couldnot found blogs with provided id"
+    // })
+    // }else {
+ 
+    //     res.json({
+    //     status : 200,
+    //     message : "Blog fetched successfully",
+    //     data : blog
+    //     })
+    // }
+// YAHA SAMMA 
+
+ // ALTERNATIVE for : const blog = await Blog.find({_id : id}) line
+ //  
+
+    const blog = await Blog.findById(id)  // it gives o/p in object format 
+    if(blog){           // so for object format, no need to check length
+        res.json ({
+            status : 200,
+            message : "Blog fetched successfully",
+            data : blog
+
+        })
+    }else {
+        res.json ({
+            status : 404,
+            message : "No blogs found with given ID"
+           
+        })
+    }
+
+})
+
+
 
 // createBlog API for creating blog
 app.post("/createBlog",async (req,res)=> {
