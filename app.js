@@ -5,8 +5,9 @@ const app = express();
 
 const { connectDatabase } = require("./database/database");
 const Blog = require("./model/blogModel");
-
 connectDatabase()
+
+
 
 
 app.get("/",(req,res)=> {
@@ -21,7 +22,7 @@ app.get("/",(req,res)=> {
 app.use(express.json())   // form ko data dekhine,, navaye undefine auxa
 app.use(express.urlencoded({extended:true}))// "  "
 
-
+// createBlog API for creating blog
 app.post("/createBlog",async (req,res)=> {
     const title = req.body.title;
     const subTitle = req.body.subTitle;
@@ -30,7 +31,7 @@ app.post("/createBlog",async (req,res)=> {
    // console.log(req.body)  // to show everything that filled in form to terminal
 
 
-   // table maa haleko:
+   // form ko data DB maa haleko:
     await Blog.create ({
         title : title,
         subTitle : subTitle,
