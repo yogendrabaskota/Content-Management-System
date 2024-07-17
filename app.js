@@ -42,7 +42,6 @@ app.get("/blogs",async(req,res)=>{
 
 
 // GET API for single blogs
-
 app.get("/blogs/:id",async(req,res) => {
  //   // console.log(req.params.id)
  // YAHA DEKHI
@@ -85,7 +84,6 @@ app.get("/blogs/:id",async(req,res) => {
 })
 
 
-
 // createBlog API for creating blog
 app.post("/createBlog",async (req,res)=> {
     const title = req.body.title;
@@ -108,6 +106,7 @@ app.post("/createBlog",async (req,res)=> {
         message : "Successfully showing"
     })
 })
+
 
 PORT = 2000
 app.listen(PORT, ()=> {
