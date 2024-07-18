@@ -15,25 +15,25 @@ app.use(express.urlencoded({extended:true}))// "  "
 
 
 app.get("/",(req,res)=> {
-    res.json({
-        status : 200,
+    res.status(200).json({
+   //     status : 200,
         message : "success"
     })
 })
 
-// GET API for all blogs: READ API
+// GET API for all blogs: READ 
 app.get("/blogs",async(req,res)=>{
     const blogs = await Blog.find()  // Blog maa store vako data 'blogs' maa janxa...[ Blog maa vako data vaneko form maa enter gareko data ho]
 // .find() maa jahile ni data array format maa auxa.
     if(blogs.length == 0){
-        res.json({
-            status : 404,
+        res.status(404).json({
+           // status : 404,
             message : "Empty blogs"
         })
     }
     else{
-        res.json({
-            status : 200,
+        res.status(200).json({
+         //   status : 200,
             message : "Blogs fetched successfully",
             data : blogs // blogs ko data show garxa 
         })
@@ -41,7 +41,7 @@ app.get("/blogs",async(req,res)=>{
 })
 
 
-// GET API for single blogs : READ API
+// GET API for single blogs : READ 
 app.get("/blogs/:id",async(req,res) => {
  //   // console.log(req.params.id)
  // YAHA DEKHI
@@ -67,15 +67,15 @@ app.get("/blogs/:id",async(req,res) => {
 
     const blog = await Blog.findById(id)  // it gives o/p in object format 
     if(blog){           // so for object format, no need to check length
-        res.json ({
-            status : 200,
+        res.status(200).json ({
+        //    status : 200,
             message : "Blog fetched successfully",
             data : blog
 
         })
     }else {
-        res.json ({
-            status : 404,
+        res.status(404).json ({
+        //    status : 404,
             message : "No blogs found with given ID"
            
         })
@@ -84,8 +84,8 @@ app.get("/blogs/:id",async(req,res) => {
 })
 
 
-// createBlog API for creating blog : CREATE API
-app.post("/createBlog",async (req,res)=> {
+// createBlog API for creating blog : CREATE 
+app.post("/blogs",async (req,res)=> {
     const title = req.body.title;
     const subTitle = req.body.subTitle;
     const description = req.body.description
@@ -101,14 +101,14 @@ app.post("/createBlog",async (req,res)=> {
 
     })
 
-    res.json({
-        statis : 201,
+    res.status(201).json({
+       // status : 201,
         message : "Successfully showing"
     })
 })
 
 
-// UPDATE API
+// UPDATE 
 app.patch("/blogs/:id",async(req,res) => {
     const id = req.params.id
     const title = req.body.title
@@ -130,7 +130,7 @@ app.patch("/blogs/:id",async(req,res) => {
 
 })
 
-// DELETE API
+// DELETE 
 app.delete("/blogs/:id",async(req,res)=>{
     const id = req.params.id
 
