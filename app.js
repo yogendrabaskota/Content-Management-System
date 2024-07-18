@@ -21,7 +21,7 @@ app.get("/",(req,res)=> {
     })
 })
 
-// GET API for all blogs
+// GET API for all blogs: READ API
 app.get("/blogs",async(req,res)=>{
     const blogs = await Blog.find()  // Blog maa store vako data 'blogs' maa janxa...[ Blog maa vako data vaneko form maa enter gareko data ho]
 // .find() maa jahile ni data array format maa auxa.
@@ -41,7 +41,7 @@ app.get("/blogs",async(req,res)=>{
 })
 
 
-// GET API for single blogs
+// GET API for single blogs : READ API
 app.get("/blogs/:id",async(req,res) => {
  //   // console.log(req.params.id)
  // YAHA DEKHI
@@ -84,7 +84,7 @@ app.get("/blogs/:id",async(req,res) => {
 })
 
 
-// createBlog API for creating blog
+// createBlog API for creating blog : CREATE API
 app.post("/createBlog",async (req,res)=> {
     const title = req.body.title;
     const subTitle = req.body.subTitle;
@@ -106,6 +106,30 @@ app.post("/createBlog",async (req,res)=> {
         message : "Successfully showing"
     })
 })
+
+
+// UPDATE API
+app.patch("/blogs/:id",async(req,res) => {
+    const id = req.params.id
+    const title = req.body.title
+    const subTitle = req.body.subTitle
+    const description = req.body.description
+
+
+    await Blog.findByIdAndUpdate(id,{
+        title : title,
+        subTitle : subTitle,
+        description : description
+    })
+
+    res.status(200).json ({
+        message : "Blogs updated successfully"
+
+    })
+
+
+})
+
 
 
 PORT = 2000
