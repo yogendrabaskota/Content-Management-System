@@ -117,24 +117,33 @@ app.patch("/blogs/:id",async(req,res) => {
 
 
     await Blog.findByIdAndUpdate(id,{
-        title : title,
-        subTitle : subTitle,
+        title : title, // update the title with entered title 
+        subTitle : subTitle, // same .... and so onn.. 
         description : description
     })
 
     res.status(200).json ({
         message : "Blogs updated successfully"
 
-    })
+    }) 
 
 
 })
 
+// DELETE API
+app.delete("/blogs/:id",async(req,res)=>{
+    const id = req.params.id
+
+
+    await Blog.findByIdAndDelete(id) //delete the blog with entered API
+
+    res.status(200).json({
+        message : "Blog deleated successfully"
+    })
+})
 
 
 PORT = 2000
 app.listen(PORT, ()=> {
     console.log("Nodejs has started at port", PORT) 
 })
-
-// 
