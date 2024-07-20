@@ -1,18 +1,17 @@
 const express = require("express");
 const app = express();
-
+const cors = require('cors')
 // const mongoose = require("mongoose")
-
 const { connectDatabase } = require("./database/database");
 const Blog = require("./model/blogModel");
 connectDatabase()
 
-
-
 app.use(express.json())   // form ko data dekhine,, navaye undefine auxa
 app.use(express.urlencoded({extended:true}))// "  "
-
-
+app.use(cors({
+    origin : "http://localhost:5173",
+    
+}))
 
 app.get("/",(req,res)=> {
     res.status(200).json({
@@ -20,6 +19,7 @@ app.get("/",(req,res)=> {
         message : "success"
     })
 })
+
 
 // GET API for all blogs: READ 
 app.get("/blogs",async(req,res)=>{
@@ -35,7 +35,7 @@ app.get("/blogs",async(req,res)=>{
         res.status(200).json({
          //   status : 200,
             message : "Blogs fetched successfully",
-            data : blogs // blogs ko data show garxa 
+            blogs : blogs // blogs ko data show garxa 
         })
     }
 })
@@ -80,7 +80,6 @@ app.get("/blogs/:id",async(req,res) => {
            
         })
     }
-
 })
 
 
@@ -127,8 +126,8 @@ app.patch("/blogs/:id",async(req,res) => {
 
     }) 
 
-
 })
+
 
 // DELETE 
 app.delete("/blogs/:id",async(req,res)=>{
