@@ -1,25 +1,21 @@
 const express = require("express");
 const app = express();
 const cors = require('cors')
-// const mongoose = require("mongoose")
 const { connectDatabase } = require("./database/database");
 const Blog = require("./model/blogModel");
 connectDatabase()
 
-app.use(express.json())   // form ko data dekhine,, navaye undefine auxa
+app.use(express.json())   
 app.use(express.urlencoded({extended:true}))// "  "
 app.use(cors({
-    origin : "http://localhost:5173",
-    
+    origin : "http://localhost:5173", 
 }))
 
 app.get("/",(req,res)=> {
     res.status(200).json({
-   //     status : 200,
         message : "success"
     })
 })
-
 
 // GET API for all blogs: READ 
 app.get("/blogs",async(req,res)=>{
@@ -38,7 +34,6 @@ app.get("/blogs",async(req,res)=>{
         })
     }
 })
-
 
 // GET API for single blogs : READ 
 app.get("/blogs/:id",async(req,res) => {
@@ -143,5 +138,5 @@ app.delete("/blogs/:id",async(req,res)=>{
 
 PORT = 2000
 app.listen(PORT, ()=> {
-    console.log("Nodejs has started at port", PORT) 
+    console.log("Nodejs has started at port: ", PORT) 
 })
